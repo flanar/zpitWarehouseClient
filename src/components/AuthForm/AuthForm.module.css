@@ -1,0 +1,59 @@
+.authCard {
+    max-width: 500px;
+    margin: auto;
+    background-color: #cfd8d7;
+}
+
+.cardTitle {
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px;
+    font-size: 2rem !important;
+}
+
+.cardText {
+    padding-top: 15px;
+}
+
+.txtb {
+    border-bottom: 2px solid #adadad;
+    position: relative;
+    margin: 30px 0;
+}
+
+.formControl {
+    border: none !important;
+    background: none !important;
+    outline: none !important;
+    height: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.txtb span::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    color: #adadad;
+    transform: translateY(-50%);
+    z-index: 1;
+    transition: .5s;
+}
+
+.txtb span::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(120deg, #7ea16b, #596f62);
+    transition: .5s;
+}
+
+.focus + span::before {
+    top: -5px;
+}
+
+.focus + span::after {
+    width: 100%;
+}

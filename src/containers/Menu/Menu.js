@@ -17,7 +17,8 @@ class Menu extends Component {
     render() {
         const authenticatedUserLinks = (
             <Nav className="ml-auto">
-                <Nav.Link eventKey="1" as={Link} to="/" onClick={this.logout}>Logout</Nav.Link>
+                <Nav.Link eventKey="1" as={Link} to="/members">Members</Nav.Link>
+                <Nav.Link eventKey="2" as={Link} to="/" onClick={this.logout}>Logout</Nav.Link>
             </Nav>
         )
 

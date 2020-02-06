@@ -8,6 +8,7 @@ import Menu from './containers/Menu/Menu'
 import Login from './containers/Authentication/Login/Login'
 import Register from './containers/Authentication/Register/Register'
 import Worehouse from './containers/Worehouse/Worehouse'
+import Members from './containers/Members/Members'
 
 class App extends Component {
     componentDidMount() {
@@ -17,6 +18,7 @@ class App extends Component {
     render() {
         const authenticatedUserRoutes = (
             <Switch>
+                <Route exact path="/members" component={Members} />
                 <Route component={Worehouse}/>
             </Switch>
         )
