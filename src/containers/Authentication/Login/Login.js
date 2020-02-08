@@ -15,12 +15,12 @@ class Login extends Component {
         const fields = [
             {
                 type: "email",
-                placeholder: "Email Address",
+                label: "Email Address",
                 name: "email"
             },
             {
                 type: "password",
-                placeholder: "Password",
+                label: "Password",
                 name: "password"
             }
         ]

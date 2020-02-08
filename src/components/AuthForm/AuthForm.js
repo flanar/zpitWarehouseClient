@@ -38,7 +38,7 @@ class AuthForm extends Component {
                             value={ this.state[field.name] }
                             onChange={ this.changeHandler }
                         />
-                        <span data-placeholder={ field.placeholder }></span>
+                        <span data-placeholder={ field.label }></span>
                     </div>
                 </Form.Group>
             )

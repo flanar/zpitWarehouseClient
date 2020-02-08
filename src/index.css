@@ -28,7 +28,7 @@ body {
 .btn-primary {
   color: #ffffff;
   background: linear-gradient(to left, #7ea16b, #596f62, #7ea16b);
-  border-color: #ffffff;
+  border-color: transparent;
   transition: .5s;
 }
 
@@ -40,8 +40,29 @@ body {
   box-shadow: 0 0 0px 1px #596f6288 !important;
 }
 
+.btn-secondary {
+  background-color: #596f62;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active,
+.btn-secondary:focus,
+.btn-secondary:not(:disabled):not(.disabled).active {
+  background-color: #7ea16b !important;
+  border-color: #7ea16b !important;
+}
+
 .form-control:focus {
   box-shadow: none;
+}
+
+/* Input autofill color fix ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 a {

@@ -1,18 +1,6 @@
-.authCard {
-    max-width: 500px;
-    margin: auto;
-    background-color: #cfd8d7;
-}
-
-.cardTitle {
+.title {
     text-align: center;
-    text-transform: uppercase;
     padding: 10px;
-    font-size: 2rem !important;
-}
-
-.cardText {
-    padding-top: 15px;
 }
 
 .txtb {
@@ -52,6 +40,7 @@
 
 .focus + span::before {
     top: -7px;
+    color: inherit;
 }
 
 .focus + span::after {

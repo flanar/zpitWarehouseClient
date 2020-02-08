@@ -16,22 +16,22 @@ class Register extends Component {
         const fields = [
             {
                 type: "text",
-                placeholder: "Enter Name",
+                label: "Enter Name",
                 name: "name"
             },
             {
                 type: "text",
-                placeholder: "Enter Surname",
+                label: "Enter Surname",
                 name: "surname"
             },
             {
                 type: "email",
-                placeholder: "Email Address",
+                label: "Email Address",
                 name: "email"
             },
             {
                 type: "password",
-                placeholder: "Password",
+                label: "Password",
                 name: "password"
             }
         ]

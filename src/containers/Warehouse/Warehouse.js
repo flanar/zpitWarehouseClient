@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 
-class Worehouse extends Component {
+class Warehouse extends Component {
     render() {
         return (
             <div className="container">
                 <div className="jumbotron mt-5">
                     <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center">MAGAZYN</h1>
+                        <h1 className="text-center">Warehouse</h1>
                     </div>
                 </div>
             </div>
@@ -14,4 +14,4 @@ class Worehouse extends Component {
     }
 }
 
-export default Worehouse
+export default Warehouse

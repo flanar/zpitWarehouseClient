@@ -1,0 +1,79 @@
+.selectBox {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .selectBox .optionsContainer {
+    background: #596f62;
+    color: #f5f6fa;
+    max-height: 0;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.4s;
+    border-radius: 8px;
+    overflow: hidden;
+    order: 1;
+  }
+  
+  .selected {
+    background: #596f62;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    color: #f5f6fa;
+    position: relative;
+    order: 0;
+  }
+  
+  .selected::after {
+    content: "";
+    background: url("img/arrow-down.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+  
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    right: 10px;
+    top: 8px;
+  
+    transition: all 0.4s;
+  }
+  
+  .selectBox .optionsContainer.active {
+    max-height: 240px;
+    opacity: 1;
+    overflow-y: scroll;
+  }
+  
+  .selectBox .optionsContainer.active + .selected::after {
+    transform: rotateX(180deg);
+  }
+  
+  .selectBox .optionsContainer::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .selectBox .optionsContainer::-webkit-scrollbar-thumb {
+    background: #525861;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .selectBox .option,
+  .selected {
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+  
+  .selectBox .option:hover {
+    background: #7ea16b;
+  }
+  
+  .selectBox label {
+    cursor: pointer;
+  }
+  
+  .selectBox .option .radio {
+    display: none;
+  }

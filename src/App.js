@@ -7,8 +7,9 @@ import { checkAuth } from './redux'
 import Menu from './containers/Menu/Menu'
 import Login from './containers/Authentication/Login/Login'
 import Register from './containers/Authentication/Register/Register'
-import Worehouse from './containers/Worehouse/Worehouse'
+import Landing from './containers/Landing/Landing'
 import Members from './containers/Members/Members'
+import Warehouse from './containers/Warehouse/Warehouse'
 
 class App extends Component {
     componentDidMount() {
@@ -19,7 +20,8 @@ class App extends Component {
         const authenticatedUserRoutes = (
             <Switch>
                 <Route exact path="/members" component={Members} />
-                <Route component={Worehouse}/>
+                <Route exact path="/warehouse" component={Warehouse} />
+                <Route component={Landing}/>
             </Switch>
         )
 
