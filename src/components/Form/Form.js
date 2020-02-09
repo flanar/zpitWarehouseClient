@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 
+import { isEmptyObject, capitalize, isEmail } from '../../utilities'
+
 import classes from './Form.module.css'
 import BootstrapForm from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Select from '../Select/Select'
+import Alert from '../Alert/Alert'
 
 class Form extends Component {
 
@@ -12,7 +15,7 @@ class Form extends Component {
             ...object,
             [item['name']]: ''
         }
-    }, {error: null})
+    }, {errors: {}})
 
     changeHandler = (e) => {
         this.setState({
@@ -26,10 +29,47 @@ class Form extends Component {
         })
     }
 
+    validateForm = () => {
+        const allErrors = {}
+        const { errors, ...fields} = this.state
+        for (let field in fields)  {
+            if(this.props.fields.filter(f => f.name === field)[0].validation)
+                this.props.fields.filter(f => f.name === field)[0].validation.forEach(rule => {
+                    if(rule === 'required')
+                        if(fields[field] === '') allErrors[`${field}${rule}`] = `${capitalize(field)} is required`
+                    if(rule === 'isEmail')
+                        if(fields[field] !== '' && !isEmail(fields[field])) allErrors[`${field}${rule}`] = `${capitalize(field)} is not valid`
+                    if(rule.startsWith('minLength:'))
+                        if(fields[field].length < rule.split(':')[1]) allErrors[`${field}${rule.split(':')[0]}`] = `${capitalize(field)} required min ${rule.split(':')[1]} characters`
+                    if(rule.startsWith('maxLength:'))
+                        if(fields[field].length > rule.split(':')[1]) allErrors[`${field}${rule.split(':')[0]}`] = `${capitalize(field)} must be max ${rule.split(':')[1]} characters`
+                    if(rule.startsWith('minValue:'))
+                        if(fields[field] < rule.split(':')[1]) allErrors[`${field}${rule.split(':')[0]}`] = `${capitalize(field)} must be greater then ${rule.split(':')[1]}`
+                    if(rule.startsWith('maxValue:'))
+                        if(fields[field] > rule.split(':')[1]) allErrors[`${field}${rule.split(':')[0]}`] = `${capitalize(field)} must be lower then ${rule.split(':')[1]}`
+                })
+        }
+
+        if(isEmptyObject(allErrors))
+            return true
+        else {
+            this.setState({ errors: allErrors })
+            return false
+        }
+    }
+
     submitHandler = (e) => {
         e.preventDefault()
-        const { error, ...data} = this.state
-        this.props.submitHandler(data)
+        const { errors, ...data } = this.state
+
+        if(this.validateForm())
+            this.props.submitHandler(data)
+    }
+
+    closeAlertHandler = (key) => {
+        const errors = { ...this.state.errors }
+        delete errors[key]
+        this.setState({ errors: errors })
     }
 
     render() {
@@ -65,11 +105,20 @@ class Form extends Component {
             }
         })
 
-        const title = this.props.title ? <h2 className={ classes.title }>{ this.props.title }</h2> : null
+        const title = this.props.title && <h2 className={ classes.title }>{ this.props.title }</h2>
+
+        const errors = !isEmptyObject(this.state.errors) && Object.keys(this.state.errors).map((key) => {
+            return (
+                <Alert key={ key } closeAlert={ () => this.closeAlertHandler(key) }>
+                    { this.state.errors[key] }
+                </Alert>
+            )
+        })
 
         return (
             <div>
                 { title }
+                { errors }
                 <BootstrapForm noValidate onSubmit={ this.submitHandler }>
                     { fields }
                     <Button type="submit" className="btn-block">{ this.props.btnText }</Button>

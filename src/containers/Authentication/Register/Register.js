@@ -17,22 +17,26 @@ class Register extends Component {
             {
                 type: "text",
                 label: "Enter Name",
-                name: "name"
+                name: "name",
+                validation: ['required', 'maxLength:50']
             },
             {
                 type: "text",
                 label: "Enter Surname",
-                name: "surname"
+                name: "surname",
+                validation: ['required', 'maxLength:50']
             },
             {
                 type: "email",
                 label: "Email Address",
-                name: "email"
+                name: "email",
+                validation: ['required', 'isEmail']
             },
             {
                 type: "password",
                 label: "Password",
-                name: "password"
+                name: "password",
+                validation: ['required', 'minLength:8', 'maxLength:30', 'password']
             }
         ]
 

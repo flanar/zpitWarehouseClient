@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+import axios from '../../axios'
 
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
@@ -17,27 +17,21 @@ class Members extends Component {
     }
 
     getGroups = async () => {
-        const response = await axios.get('api/getGroups', {
-            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
-        })
+        const response = await axios.get('getGroups')
         this.setState({
             groups: response.data.groups
         })
     }
 
     getMembers = async () => {
-        const response = await axios.get('api/getMembers', {
-            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
-        })
+        const response = await axios.get('getMembers')
         this.setState({
             members: response.data.members
         })
     }
 
     createMember = async (member) => {
-        const response = await axios.post('api/members', member, {
-            headers: { Authorization: `Bearer ${localStorage.usertoken}` }
-        })
+        const response = await axios.post('members', member)
         if(response.status === 200) {
             this.getMembers()
             this.setState({
@@ -112,22 +106,26 @@ class Members extends Component {
             {
                 type: "text",
                 label: "Name",
-                name: "name"
+                name: "name",
+                validation: ['required', 'minLength:4']
             },
             {
                 type: "text",
                 label: "Surname",
-                name: "surname"
+                name: "surname",
+                validation: ['required', 'maxLength:16']
             },
             {
                 type: "email",
                 label: "Email Address",
-                name: "email"
+                name: "email",
+                validation: ['isEmail']
             },
             {
                 type: "select",
                 label: "Group",
                 name: "group",
+                validation: ['required'],
                 options: this.state.groups.map((group) => {
                     return {
                         value: group.group_id,

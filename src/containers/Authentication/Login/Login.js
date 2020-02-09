@@ -16,12 +16,16 @@ class Login extends Component {
             {
                 type: "email",
                 label: "Email Address",
-                name: "email"
+                name: "email",
+                validation: ['required', 'isEmail'],
+                noStars: true
             },
             {
                 type: "password",
                 label: "Password",
-                name: "password"
+                name: "password",
+                validation: ['required', 'minLength:8', 'maxLength:30', 'password'],
+                noStars: true
             }
         ]
 
