@@ -17,8 +17,26 @@
     overflow-y: auto;
 }
 
+.tableContainer table tbody tr {
+    cursor: pointer;
+}
+
 .utilities {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.editUtilities {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.editUtilities > Button {
+    width: 100%;;
+}
+
+.title {
+    text-align: center;
+    padding: 10px;
 }

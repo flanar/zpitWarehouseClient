@@ -4,7 +4,7 @@ import classes from './Select.module.css'
 
 class Select extends Component {
     state = {
-        selectedItemText: 'Select Item',
+        selectedItemText: this.props.field.defaultValue ? this.props.field.options.filter(option => option.value === this.props.field.defaultValue)[0].text : 'Select Item',
         show: false
     }
 

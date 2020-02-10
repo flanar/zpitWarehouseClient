@@ -13,9 +13,12 @@ class Form extends Component {
     state = this.props.fields.reduce((object, item) => {
         return {
             ...object,
-            [item['name']]: ''
+            [item['name']]: item['defaultValue'] ? item['defaultValue'] : ''
         }
-    }, {errors: {}})
+    }, {
+        errors: {},
+        processSubmit: false
+    })
 
     changeHandler = (e) => {
         this.setState({
@@ -31,7 +34,7 @@ class Form extends Component {
 
     validateForm = () => {
         const allErrors = {}
-        const { errors, ...fields} = this.state
+        const { processSubmit, errors, ...fields} = this.state
         for (let field in fields)  {
             if(this.props.fields.filter(f => f.name === field)[0].validation)
                 this.props.fields.filter(f => f.name === field)[0].validation.forEach(rule => {
@@ -60,10 +63,12 @@ class Form extends Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        const { errors, ...data } = this.state
+        const { processSubmit, errors, ...data } = this.state
 
-        if(this.validateForm())
+        if(this.validateForm()) {
+            this.setState({ processSubmit: true })
             this.props.submitHandler(data)
+        }
     }
 
     closeAlertHandler = (key) => {
@@ -87,7 +92,7 @@ class Form extends Component {
                                     value={ this.state[field.name] }
                                     onChange={ this.changeHandler }
                                 />
-                                <span data-placeholder={ field.label }></span>
+                                <span data-placeholder={ field.label + (!field.noStars && field.validation && field.validation.includes('required') ? '*' : '') }></span>
                             </div>
                         </BootstrapForm.Group>
                     )
@@ -121,7 +126,7 @@ class Form extends Component {
                 { errors }
                 <BootstrapForm noValidate onSubmit={ this.submitHandler }>
                     { fields }
-                    <Button type="submit" className="btn-block">{ this.props.btnText }</Button>
+                    <Button disabled={ this.state.processSubmit ? "disabled" : null }type="submit" className="btn-block">{ this.props.btnText }</Button>
                 </BootstrapForm>
             </div>
         )
