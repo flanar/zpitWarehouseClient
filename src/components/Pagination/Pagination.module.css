@@ -1,0 +1,34 @@
+.paginationContainer {
+    margin: 10px 0px;
+}
+
+button.pageItem {
+    padding: .5rem .75rem;
+    border-radius: .25rem;
+    line-height: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #343a40;
+    border: 1px solid #343a40;
+}
+
+.pageItem:hover {
+    background-color: #565c62;
+    border: 1px solid #343a40;
+    outline: none;
+}
+
+.pageItem:active,
+.pageItem:focus {
+    outline: none;
+}
+
+.pageItem.active {
+    background-color: #565c62;
+}
+
+button.pageItem:disabled {
+    background-color: #565c62;
+    border-color: #565c62;
+    
+}

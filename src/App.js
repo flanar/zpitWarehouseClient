@@ -10,6 +10,7 @@ import Register from './containers/Authentication/Register/Register'
 import Landing from './containers/Landing/Landing'
 import Members from './containers/Members/Members'
 import Warehouse from './containers/Warehouse/Warehouse'
+import Table from './components/Table/Table'
 
 class App extends Component {
     componentDidMount() {
@@ -30,6 +31,7 @@ class App extends Component {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/" component={Login} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/table" component={Table} />
                 <Route component={Login}/>
             </Switch>
         )

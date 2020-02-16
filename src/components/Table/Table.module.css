@@ -1,0 +1,48 @@
+.container {
+    width: 1400px;
+    margin: auto;
+    min-height: 70vh;
+    margin-top: 50px;
+}
+
+.table {
+    width: 100%;
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.tbody > .tr:nth-of-type(2n + 1) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tbody > .tr:hover {
+    background-color: #212529;
+}
+
+.th, .td {
+    padding: .75rem;
+}
+
+.th {
+    font-weight: bold;
+}
+
+.th.filters {
+    padding-top: 0;
+}
+
+.th.filters > input {
+    width: 100%;
+}
+
+.td:hover:not(.actions) {
+    cursor: pointer;
+}
+
+.actions {
+    text-align: center;
+}
+
+.actions > * {
+    cursor: pointer;
+}
