@@ -25,6 +25,7 @@
 
 .th {
     font-weight: bold;
+    cursor: pointer;
 }
 
 .th.filters {
@@ -45,4 +46,8 @@
 
 .actions > * {
     cursor: pointer;
+}
+
+.arrow {
+    margin-left: 10px;
 }

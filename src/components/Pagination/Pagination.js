@@ -1,46 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import classes from './Pagination.module.css'
 
-const Pagination = ({ numberOfPages, itemsPerPage, startPage }) => {
-
-    const countFirstPage = page => {
-        if(numberOfPages <= 5 || page <= 2)
-            return 1
-        else if(page >= numberOfPages - 2)
-            return numberOfPages - 4
-        else
-            return page - 2
-    }
-
-    const countLastPage = page => {
-        if(numberOfPages <= 5 || page >= numberOfPages - 2)
-            return numberOfPages
-        else if(page <= 2)
-            return 5
-        else
-            return page + 2
-    }
-
-    const [currentPage, setCurrentPage] = useState(startPage)
-    const [firstPage, setFirstPage] = useState(countFirstPage(startPage))
-    const [lastPage, setLastPage] = useState(countLastPage(startPage))
-
-    const countNextPage = page => {
-        if(page === '<' && currentPage !== 1) {
-            setCurrentPage(prevState => prevState - 1)
-            setFirstPage(countFirstPage(currentPage - 1))
-            setLastPage(countLastPage(currentPage - 1))
-        } else if(page === '>' && currentPage !== numberOfPages) {
-            setCurrentPage(prevState => prevState + 1)
-            setFirstPage(countFirstPage(currentPage + 1))
-            setLastPage(countLastPage(currentPage + 1))
-        } else if(page !== '<' && page !== '>') {
-            setCurrentPage(page)
-            setFirstPage(countFirstPage(currentPage))
-            setLastPage(countLastPage(currentPage))
-        }
-    }
+const Pagination = ({ currentPage, firstPage, lastPage, countNextPage, numberOfPages }) => {
 
     const pageItem = (innerText, key=null, disabled=false) => (
         <button
