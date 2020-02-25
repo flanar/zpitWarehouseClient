@@ -1,8 +1,14 @@
 .container {
-    width: 1400px;
+    max-width: 1400px;
     margin: auto;
     min-height: 70vh;
     margin-top: 50px;
+}
+
+.tableContainer {
+    width: 1400px;
+    max-width: 100vw;
+    overflow-x: scroll;
 }
 
 .table {
@@ -25,7 +31,7 @@
 
 .th {
     font-weight: bold;
-    cursor: pointer;
+    min-width: 100px;
 }
 
 .th.filters {
@@ -50,4 +56,8 @@
 
 .arrow {
     margin-left: 10px;
+}
+
+.pointer {
+    cursor: pointer;
 }

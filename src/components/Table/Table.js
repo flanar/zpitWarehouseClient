@@ -6,7 +6,28 @@ import { faTrash, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-ico
 import Pagination from '../Pagination/Pagination'
 
 const Table = ({ startPage = 5 }) => {
-    const propsHeaders = ['#', 'Name', 'Surname', 'Email', '']
+    const propsHeaders = [
+        {
+            name: '#',
+            filterable: true,
+            searchable: false
+        },
+        {
+            name: 'Name',
+            filterable: true,
+            searchable: true
+        },
+        {
+            name: 'Surname',
+            filterable: true,
+            searchable: true
+        },
+        {
+            name: 'Email',
+            filterable: true,
+            searchable: true
+        }
+    ]
     
     const propsData = [
         {
@@ -83,9 +104,9 @@ const Table = ({ startPage = 5 }) => {
 
     const arrow = sort.split(';')[0] === 'up' ? <FontAwesomeIcon className={ classes.arrow } icon={ faArrowUp } /> : <FontAwesomeIcon className={ classes.arrow } icon={ faArrowDown } />
 
-    const headers = propsHeaders.map(header => <th key={ header } className={ classes.th } onClick={ () => sortHandler(header) }>{ header }{ header === sort.split(';')[1] ? arrow : null }</th>)
+    const headers = propsHeaders.map(header => <th key={ header.name } className={ [classes.th, header.filterable ? classes.pointer : null].join(' ') } onClick={ header.filterable ? () => sortHandler(header.name) : null }>{ header.name }{ header.name === sort.split(';')[1] ? arrow : null }</th>)
 
-    const filters = propsHeaders.map(header => <th key={header} className={ [classes.th, classes.filters].join(' ') }>{ header !== '' && <input type="text" />}</th>)
+    const filters = propsHeaders.map(header => <th key={header.name} className={ [classes.th, classes.filters].join(' ') }>{ header.searchable && <input type="text" />}</th>)
 
     const data = propsData.map((item, index) => (
         <tr key={ index } className={ classes.tr }>
@@ -97,15 +118,17 @@ const Table = ({ startPage = 5 }) => {
 
     return (
         <div className={ classes.container }>
-            <table className={ classes.table }>
-                <thead className={ classes.thead }>
-                    <tr className={ classes.tr }>{ headers }</tr>
-                    <tr className={ classes.tr }>{ filters }</tr>
-                </thead>
-                <tbody className={ classes.tbody }>
-                    { data }
-                </tbody>
-            </table>
+            <div className={ classes.tableContainer }>
+                <table className={ classes.table }>
+                    <thead className={ classes.thead }>
+                        <tr className={ classes.tr }>{ headers }</tr>
+                        <tr className={ classes.tr }>{ filters }</tr>
+                    </thead>
+                    <tbody className={ classes.tbody }>
+                        { data }
+                    </tbody>
+                </table>
+            </div>
             <Pagination numberOfPages={numberOfPages} currentPage={currentPage} firstPage={firstPage} lastPage={lastPage} countNextPage={countNextPage} />
         </div>
     )
