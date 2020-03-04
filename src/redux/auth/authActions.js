@@ -24,7 +24,7 @@ export const loginFailure = error => {
 export const login = user => {
     return dispatch => {
         dispatch(loginRequest())
-        axios.post('api/login', {
+        axios.post('login', {
             email: user.email,
             password: user.password
         }, {
