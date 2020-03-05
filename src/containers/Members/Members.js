@@ -21,16 +21,16 @@ class Members extends Component {
     }
 
     getGroups = async () => {
-        const response = await axios.get('getGroups')
+        const response = await axios.get('groups')
             this.setState({
-                groups: response.data.groups
+                groups: response.data
             })
     }
 
     getMembers = async () => {
-        const response = await axios.get('getMembers')
+        const response = await axios.get('members')
         this.setState({
-            members: response.data.members
+            members: response.data
         })
     }
 
