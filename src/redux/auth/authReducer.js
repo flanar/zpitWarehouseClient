@@ -1,7 +1,9 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "./authTypes"
 
 const initialState = {
-    isAuthenticated: false,
+    isAuthorized: false,
+    tokenRefreshCounterId: null,
+    auth: {},
     loading: false,
     error: null
 }
@@ -17,7 +19,7 @@ const loginRequest = (state, action) => {
 const loginSuccess = (state, action) => {
     return {
         ...state,
-        isAuthenticated: true,
+        isAuthorized: true,
         loading: false,
         error: null
     }
@@ -26,7 +28,7 @@ const loginSuccess = (state, action) => {
 const loginFailure = (state, action) => {
     return {
         ...state,
-        isAuthenticated: false,
+        isAuthorized: false,
         loading: false,
         error: action.error
     }
@@ -35,7 +37,9 @@ const loginFailure = (state, action) => {
 const logout = (state, action) => {
     return {
         ...state,
-        isAuthenticated: false
+        isAuthorized: false,
+        tokenRefreshCounterId: null,
+        auth: {}
     }
 }
 

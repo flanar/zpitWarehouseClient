@@ -1,10 +1,7 @@
-import axios from 'axios'
+import { api } from '../../axios'
 
 export const register = newUser => {
-    return axios
-        .post('register', newUser, {
-            headers: { 'Content-Type': 'application/json' }
-        })
+    return api.post('register', newUser)
         .then(res => {
             console.log(res)
             return { status: "success" }

@@ -34,7 +34,7 @@ class Menu extends Component {
                 <Navbar.Brand href="/">Magazyn</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    {this.props.isAuthenticated ? authenticatedUserLinks : unauthenticatedUserLinks}
+                    {this.props.isAuthorized ? authenticatedUserLinks : unauthenticatedUserLinks}
                 </Navbar.Collapse>
             </Navbar>
         )
@@ -43,7 +43,7 @@ class Menu extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthorized: state.auth.isAuthorized
     }
 }
 

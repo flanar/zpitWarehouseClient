@@ -1,4 +1,5 @@
-import axios from 'axios'
+import { api } from '../../axios'
+import { setLocalStorageTokens, removeLocalStorageTokens, getAccessToken } from './authUtilities'
 
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "./authTypes"
 
@@ -24,14 +25,12 @@ export const loginFailure = error => {
 export const login = user => {
     return dispatch => {
         dispatch(loginRequest())
-        axios.post('login', {
+        api.post('login', {
             email: user.email,
             password: user.password
-        }, {
-            headers: { 'Content-Type': 'application/json' }
         })
         .then(res => {
-            localStorage.setItem('usertoken', res.data.token)
+            setLocalStorageTokens(res.data)
             dispatch(loginSuccess())
         })
         .catch(err => {
@@ -42,7 +41,7 @@ export const login = user => {
 }
 
 export const logout = () => {
-    localStorage.removeItem('usertoken')
+    removeLocalStorageTokens()
     return {
         type: LOGOUT
     }
@@ -50,7 +49,7 @@ export const logout = () => {
 
 export const checkAuth = () => {
     return dispatch => {
-        if(localStorage.getItem('usertoken'))
+        if(getAccessToken())
             dispatch(loginSuccess())
         else
             dispatch(logout())

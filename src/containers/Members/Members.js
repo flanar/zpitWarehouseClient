@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import axios from '../../axios'
+import { api, authenticationHeader } from '../../axios'
 
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
@@ -21,46 +21,36 @@ class Members extends Component {
     }
 
     getGroups = async () => {
-        const response = await axios.get('groups')
-            this.setState({
-                groups: response.data
-            })
+        const response = await api.get('groups', { headers: authenticationHeader() })
+        if(response.status === 200) this.setState({ groups: response.data })
     }
 
     getMembers = async () => {
-        const response = await axios.get('members')
-        this.setState({
-            members: response.data
-        })
+        const response = await api.get('members', { headers: authenticationHeader() })
+        if(response.status === 200) this.setState({ members: response.data })
     }
 
     createMember = async (member) => {
-        const response = await axios.post('members', member)
+        const response = await api.post('members', member, { headers: authenticationHeader() })
         if(response.status === 200) {
             this.getMembers()
-            this.setState({
-                addMemberModalShow: false
-            })
+            this.setState({ addMemberModalShow: false })
         }
     }
 
     editMember = async (memberId, member) => {
-        const response = await axios.put(`members/${memberId}`, member)
+        const response = await api.put(`members/${memberId}`, member, { headers: authenticationHeader() })
         if(response.status === 200) {
             this.getMembers()
-            this.setState({
-                editMemberModalShow: false
-            })
+            this.setState({ editMemberModalShow: false })
         }
     }
 
     deleteMember = async () => {
-        const response = await axios.delete(`members/${this.state.editMemberId}`)
+        const response = await api.delete(`members/${this.state.editMemberId}`, { headers: authenticationHeader() })
         if(response.status === 200) {
             this.getMembers()
-            this.setState({
-                deleteMemberAlertShow: false,
-            })
+            this.setState({ deleteMemberAlertShow: false })
             this.toggleEditMemberModal()
         }
     }

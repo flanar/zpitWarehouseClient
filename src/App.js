@@ -40,7 +40,7 @@ class App extends Component {
             <>
                 <Router>
                     <Menu />
-                    {this.props.isAuthenticated ? authenticatedUserRoutes : unauthenticatedUserRoutes}
+                    {this.props.isAuthorized ? authenticatedUserRoutes : unauthenticatedUserRoutes}
                 </Router>
             </>
         )
@@ -49,7 +49,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthorized: state.auth.isAuthorized
     }
 }
 
